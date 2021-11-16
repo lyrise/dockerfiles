@@ -1,0 +1,68 @@
+version: "3.9"
+
+x-redash-service: &redash-service
+  image: redash/redash:10.0.0.b50363
+x-redash-environment: &redash-environment
+  REDASH_LOG_LEVEL: "INFO"
+  REDASH_REDIS_URL: "redis://redis:6379/0"
+  REDASH_DATABASE_URL: "postgresql://postgres@postgres/postgres"
+  REDASH_RATELIMIT_ENABLED: "false"
+  REDASH_MAIL_DEFAULT_SENDER: "redash@example.com"
+  REDASH_MAIL_SERVER: "email"
+  REDASH_ENFORCE_CSRF: "true"
+
+services:
+  server:
+    <<: *redash-service
+    command: server
+    ports:
+      - "5000:5000"
+    environment:
+      <<: *redash-environment
+    depends_on:
+      - postgres
+      - redis
+    restart: always
+  scheduler:
+    <<: *redash-service
+    command: scheduler
+    environment:
+      <<: *redash-environment
+    depends_on:
+      - postgres
+      - redis
+    restart: always
+  worker:
+    <<: *redash-service
+    command: worker
+    environment:
+      <<: *redash-environment
+    depends_on:
+      - postgres
+      - redis
+    restart: always
+  redis:
+    image: redis:6.2-alpine
+    restart: always
+  postgres:
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: 'trust'
+    volumes:
+      - redash_postgres_data:/var/lib/postgresql/data
+    restart: always
+
+  create_db:
+    <<: *redash-service
+    command: create_db
+    environment:
+      <<: *redash-environment
+    depends_on:
+      - postgres
+      - redis
+    profiles:
+      - create_db
+
+volumes:
+  redash_postgres_data:
+    driver: local
