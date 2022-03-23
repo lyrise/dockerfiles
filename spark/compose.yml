@@ -5,3 +5,5 @@ services:
     build:
       context: .
     command: sleep infinity
+    ports:
+      - 4040:4040
