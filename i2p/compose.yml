@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   i2p:
-    image: geti2p/i2p
+    image: geti2p/i2p:latest
     ports:
       - "4444:4444"
       - "6668:6668"
