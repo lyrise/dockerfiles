@@ -1,0 +1,13 @@
+{
+  "name": "kaggle",
+  "dockerComposeFile": "../compose.yml",
+  "service": "app",
+  "workspaceFolder": "/work",
+  "settings": {
+    "dotfiles.repository": "https://github.com/lyrise/dotfiles.git",
+    "dotfiles.targetPath": "~/dotfiles",
+    "dotfiles.installCommand": "~/dotfiles/install.sh",
+    "terminal.integrated.defaultProfile.linux": "zsh"
+  },
+  "extensions": []
+}

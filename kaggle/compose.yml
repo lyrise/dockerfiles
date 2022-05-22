@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  app:
+    image: kaggle/python:latest
+    container_name: kaggle_container
+    volumes:
+      - ./src:/work
+      - ~/.kaggle/:/root/.kaggle/
+    working_dir: /work
+    command: sleep infinity
+    network_mode: "bridge"
