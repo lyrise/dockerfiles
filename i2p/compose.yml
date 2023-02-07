@@ -1,8 +1,13 @@
 version: "3.9"
 services:
   i2p:
-    image: geti2p/i2p:latest
-    network_mode: host
+    image: geti2p/i2p
+    ports:
+      - 127.0.0.1:4444:4444
+      - 127.0.0.1:6668:6668
+      - 127.0.0.1:7657:7657
+      - 54321:12345
+      - 54321:12345/udp
     volumes:
       - ./config:/i2p/.i2p
       - ./torrents:/i2psnark
