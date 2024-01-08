@@ -1,3 +1,9 @@
-# I2P
+## Usage
 
-http://localhost:7657/home
+```sh
+docker compose up --build
+```
+
+## Links
+
+- http://localhost:7657/home

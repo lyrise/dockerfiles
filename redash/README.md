@@ -1,3 +1,9 @@
-# Redash
+## Usage
 
-http://localhost:5000/setup
+```sh
+docker compose up --build
+```
+
+## Links
+
+- http://localhost:5000/setup
