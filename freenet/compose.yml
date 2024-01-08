@@ -1,0 +1,8 @@
+services:
+  freenet:
+    build:
+      context: .
+    network_mode: "host"
+    user: freenet
+    volumes:
+      - ./data:/freenet/data
