@@ -2,7 +2,6 @@ FROM openjdk:11-jre-slim
 
 ENV USER_ID 1000
 ENV GROUP_ID 1000
-ENV BUILD 1480
 
 RUN addgroup --system --gid $GROUP_ID freenet && adduser --system --uid=$USER_ID --gid=$GROUP_ID --home /freenet --shell /bin/bash --gecos "Freenet" freenet
 
