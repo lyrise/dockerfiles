@@ -11,6 +11,7 @@ x-redash-environment: &redash-environment
   REDASH_COOKIE_SECRET: "xxxxxx" # 任意の文字列を設定してください
 
 services:
+
   server:
     <<: *redash-service
     command: server
@@ -22,6 +23,7 @@ services:
       - postgres
       - redis
     restart: always
+
   scheduler:
     <<: *redash-service
     command: scheduler
@@ -31,6 +33,7 @@ services:
       - postgres
       - redis
     restart: always
+
   worker:
     <<: *redash-service
     command: worker
@@ -40,15 +43,18 @@ services:
       - postgres
       - redis
     restart: always
+
   redis:
     image: redis:7.2.4
     restart: always
+
   postgres:
     image: postgres:14
     environment:
       POSTGRES_HOST_AUTH_METHOD: 'trust'
     volumes:
-      - redash_postgres_data:/var/lib/postgresql/data
+      - ./db/postgres:/var/lib/postgresql/data
+      - ./db/logs:/var/log
     restart: always
 
   create_db:
@@ -61,7 +67,3 @@ services:
       - redis
     profiles:
       - create_db
-
-volumes:
-  redash_postgres_data:
-    driver: local
