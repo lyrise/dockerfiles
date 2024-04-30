@@ -1,7 +1,5 @@
-version: "3.9"
-
 x-redash-service: &redash-service
-  image: redash/redash:10.0.0.b50363
+  image: redash/redash:10.1.0.b50633
 x-redash-environment: &redash-environment
   REDASH_LOG_LEVEL: "INFO"
   REDASH_REDIS_URL: "redis://redis:6379/0"
@@ -10,6 +8,7 @@ x-redash-environment: &redash-environment
   REDASH_MAIL_DEFAULT_SENDER: "redash@example.com"
   REDASH_MAIL_SERVER: "email"
   REDASH_ENFORCE_CSRF: "true"
+  REDASH_COOKIE_SECRET: "xxxxxx" # 任意の文字列を設定してください
 
 services:
   server:
@@ -42,10 +41,10 @@ services:
       - redis
     restart: always
   redis:
-    image: redis:6.2-alpine
+    image: redis:7.2.4
     restart: always
   postgres:
-    image: postgres:14-alpine
+    image: postgres:14
     environment:
       POSTGRES_HOST_AUTH_METHOD: 'trust'
     volumes:

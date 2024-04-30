@@ -1,4 +1,3 @@
-version: "3.9"
 services:
   i2p:
     image: geti2p/i2p
